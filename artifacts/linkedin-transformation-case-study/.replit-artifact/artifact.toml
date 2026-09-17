@@ -17,7 +17,7 @@ run = "pnpm --filter @workspace/linkedin-transformation-case-study run dev"
 [services.production]
 build = [ "pnpm", "--filter", "@workspace/linkedin-transformation-case-study", "run", "build" ]
 serve = "static"
-publicDir = "artifacts/linkedin-transformation-case-study/dist/public"
+publicDir = "artifacts/linkedin-transformation-case-study/dist"
 
 [[services.production.rewrites]]
 from = "/*"
