@@ -7,8 +7,27 @@
   var menuToggle = document.querySelector(".menu-toggle");
   var nav = document.getElementById("site-nav");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var PORTFOLIO_EMAIL = "CONFIGURE_PORTFOLIO_EMAIL";
+  var PORTFOLIO_LINKEDIN_URL = "CONFIGURE_LINKEDIN_PROFILE_URL";
 
   if (window.lucide) window.lucide.createIcons();
+
+  function isConfigured(value) {
+    return value && value.indexOf("CONFIGURE_") !== 0;
+  }
+
+  function configureExternalLinks() {
+    document.querySelectorAll("[data-contact-link]").forEach(function (link) {
+      if (!isConfigured(PORTFOLIO_EMAIL)) return;
+      var subject = link.getAttribute("data-contact-subject");
+      link.href = "mailto:" + PORTFOLIO_EMAIL + (subject ? "?subject=" + encodeURIComponent(subject) : "");
+    });
+
+    document.querySelectorAll("[data-linkedin-link]").forEach(function (link) {
+      if (isConfigured(PORTFOLIO_LINKEDIN_URL)) link.href = PORTFOLIO_LINKEDIN_URL;
+    });
+  }
+  configureExternalLinks();
 
   function updateScrollUI() {
     var scrollable = document.documentElement.scrollHeight - window.innerHeight;
@@ -43,6 +62,7 @@
       if (!target) return;
       event.preventDefault();
       target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      window.history.pushState(null, "", link.getAttribute("href"));
     });
   });
 
@@ -53,7 +73,7 @@
   }
 
   var revealItems = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window && !reduceMotion) {
+  if (typeof window.IntersectionObserver === "function" && !reduceMotion) {
     var revealObserver = new IntersectionObserver(function (entries, observer) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -62,6 +82,7 @@
         }
       });
     }, { threshold: 0.12 });
+    document.body.classList.add("reveal-enabled");
     revealItems.forEach(function (item) { revealObserver.observe(item); });
   } else {
     revealItems.forEach(function (item) { item.classList.add("is-visible"); });
@@ -69,7 +90,7 @@
 
   var sections = document.querySelectorAll("main section[id]");
   var navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
-  if ("IntersectionObserver" in window) {
+  if (typeof window.IntersectionObserver === "function") {
     var sectionObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;

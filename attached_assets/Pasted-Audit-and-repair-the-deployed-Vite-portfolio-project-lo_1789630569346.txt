@@ -1,0 +1,45 @@
+Audit and repair the deployed Vite portfolio project located at artifacts/linkedin-transformation-case-study.
+The live Netlify site loads its HTML and CSS, but /script.js returns a 404. Consequently, every .reveal element stays at opacity: 0, making most of the page invisible.
+Complete these corrections:
+Fix JavaScript bundling
+Find the non-module <script src="/script.js"></script> reference.
+Convert it to a Vite-managed module entry using <script type="module" src="/script.js"></script>.
+Confirm the script exists inside the application package.
+Ensure vite build bundles it into dist/assets.
+Confirm dist/index.html references the generated JavaScript asset.
+Confirm there is no unresolved /script.js request in the production output.
+Add progressive enhancement
+Content must be visible by default.
+Do not apply opacity: 0 unless the reveal-animation JavaScript initializes successfully.
+Add a class such as .reveal-enabled from JavaScript before applying hidden animation states.
+If JavaScript fails, is disabled, or IntersectionObserver is unavailable, all content must remain visible.
+Preserve prefers-reduced-motion.
+Test all functionality
+Sticky navigation
+Mobile menu
+Side-by-side, Before Only, and After Only controls
+Comparison slider
+Reading-progress bar
+Active navigation state
+Back-to-top button
+Scroll-reveal animations
+All internal anchor links
+Restore the approved case-study content
+Restore the full approved After-profile headline and copy.
+Restore the fifth strategy comparison titled “Differentiation.”
+Keep Maya’s offer as a 12-week leadership coaching program.
+Remove the invented “London / Remote” location.
+Do not introduce services, locations, claims, metrics, testimonials, or client results that were not supplied.
+Remove unfinished placeholders
+Replace hello@example.com with a clearly marked variable or the portfolio owner’s actual email when provided.
+Replace the generic LinkedIn URL with a clearly marked configurable value.
+Do not make “Portfolio” link back to #top; either use a real portfolio URL or temporarily remove the link.
+Update or remove 04 / 2024 and © 2024.
+Production verification
+Run the same production build used by Netlify.
+Confirm dist/index.html exists.
+Confirm generated CSS and JavaScript assets exist under dist/assets.
+Test the production build, not only the Replit development preview.
+Verify there are no missing assets, console errors, blank sections, or horizontal overflow.
+Do not add a backend, database, React, TypeScript application code, or additional framework.
+Do not redesign the project. Repair the deployment, restore the approved content, remove placeholders, and preserve the existing premium visual direction.

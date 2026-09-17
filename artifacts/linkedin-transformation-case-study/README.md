@@ -50,7 +50,7 @@ PORT=5173 BASE_PATH=/ npm run dev
 
 ## How to customize
 
-- Replace `hello@example.com` in `index.html` navigation, CTA, and footer mailto links.
+- Set `PORTFOLIO_EMAIL` and `PORTFOLIO_LINKEDIN_URL` in `script.js` before publishing.
 - Update the Maya Reynolds profile copy in the Before/After comparison cards.
 - Update the footer name, role labels, social links, and page metadata if using the case study as a personal portfolio template.
 - Keep the “Concept Project” label and disclosure when the work is still speculative.
